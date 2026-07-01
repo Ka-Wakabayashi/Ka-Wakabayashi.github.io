@@ -1,70 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Katsunori Wakabayashi</title>
+
   <style>
+    :root {
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --bg: #ffffff;
+      --soft: #f8fafc;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 0 24px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.7;
-      color: #222;
     }
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 0.2em;
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
     }
-    .subtitle {
-      font-size: 1.2rem;
-      color: #555;
-      margin-bottom: 2em;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
     }
-    section {
-      margin-top: 2.5em;
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
-    a {
-      color: #0969da;
+
+    nav a {
+      margin-left: 18px;
+      color: var(--muted);
       text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+      padding: 72px 0 56px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      letter-spacing: -0.06em;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .summary {
+      font-size: 1.08rem;
+      max-width: 720px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #115e59;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .visual {
+      min-height: 280px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 30% 30%, #99f6e4, transparent 28%),
+        radial-gradient(circle at 70% 65%, #bfdbfe, transparent 30%),
+        linear-gradient(135deg, #f8fafc, #e0f2fe);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: end;
+      padding: 26px;
+      overflow: hidden;
+    }
+
+    .visual-text {
+      font-size: 0.95rem;
+      color: #334155;
+      font-weight: 700;
+    }
+
+    section {
+      margin-top: 56px;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pub {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pub:last-child {
+      border-bottom: none;
+    }
+
+    .pub-title {
+      font-weight: 700;
+    }
+
+    .pub-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      background: white;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 72px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 14px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 48px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
-  <h1>Katsunori Wakabayashi</h1>
+  <div class="container">
+    <header>
+      <div class="brand">Katsunori Wakabayashi</div>
+      <nav>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#links">Links</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <div class="subtitle">
-    Theoretical Physicist<br>
-    Quantum Materials Design Group<br>
-    National Institute for Materials Science (NIMS)
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Theoretical condensed matter physics</div>
+          <h1>Katsunori Wakabayashi</h1>
+
+          <div class="subtitle">
+            Group Leader, Quantum Materials Design Group<br />
+            National Institute for Materials Science (NIMS)
+          </div>
+
+          <p class="summary">
+            I am a theoretical physicist working on quantum materials,
+            two-dimensional systems, and topological phenomena. My research
+            focuses on electronic, optical, and transport properties of
+            low-dimensional materials, including graphene, transition-metal
+            dichalcogenides, moiré systems, and topological photonic structures.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Quantum materials</span>
+            <span class="chip">2D materials</span>
+            <span class="chip">Moiré systems</span>
+            <span class="chip">Topological physics</span>
+            <span class="chip">Quantum transport</span>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="visual-text">
+            Quantum Materials Design<br />
+            Graphene · TMDCs · Moiré · Topology
+          </div>
+        </div>
+      </section>
+
+      <section id="research">
+        <h2>Research</h2>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Quantum transport in 2D materials</h3>
+            <p>
+              Theory of electronic, valley, spin, and optical transport in
+              graphene, transition-metal dichalcogenides, and related
+              low-dimensional systems.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Moiré exciton photoluminescence</h3>
+            <p>
+              Inverse analysis of hyperspectral photoluminescence maps,
+              disorder metrology, and exciton physics in moiré heterostructures.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Topological photonics and lattice models</h3>
+            <p>
+              Topological states, corner and hinge modes, and photonic
+              analogues of condensed-matter systems.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Quantum-information-inspired materials physics</h3>
+            <p>
+              Exploring connections between lattice physics, topology,
+              stabilizer-like structures, and quantum information concepts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications">
+        <h2>Selected Publications</h2>
+
+        <div class="pub">
+          <div class="pub-title">
+            Valley engineering in bilayer WSe₂ gate-all-around transistors
+          </div>
+          <div class="pub-meta">
+            K. Wakabayashi, S. Adhikary, T. Kameda, T. Tsukagoshi, arXiv, 2026
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-title">
+            Descriptor covariance and correlation hierarchy in moiré exciton photoluminescence
+          </div>
+          <div class="pub-meta">
+            K. Wakabayashi et al., 2026
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-title">
+            Optically induced spin Hall current in Janus transition-metal dichalcogenides
+          </div>
+          <div class="pub-meta">
+            T. Kameda and K. Wakabayashi, Physical Review B
+          </div>
+        </div>
+
+        <div class="pub">
+          <div class="pub-title">
+            Shift current conductivity in monolayer SnS: a tight-binding analysis
+          </div>
+          <div class="pub-meta">
+            K. Kusunoki, T. Kameda, and K. Wakabayashi, JPSJ
+          </div>
+        </div>
+      </section>
+
+      <section id="links">
+        <h2>Links</h2>
+
+        <div class="links">
+          <a class="button" href="https://github.com/Ka-Wakabayashi">GitHub</a>
+          <a class="button" href="#">Google Scholar</a>
+          <a class="button" href="#">ORCID</a>
+          <a class="button" href="#">researchmap</a>
+          <a class="button" href="#">NIMS profile</a>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          Quantum Materials Design Group<br />
+          National Institute for Materials Science (NIMS)<br />
+          Email: WAKABAYASHI.Katsunori [at] nims.go.jp
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © Katsunori Wakabayashi
+    </footer>
   </div>
-
-  <section>
-    <h2>About</h2>
-    <p>
-      I am a theoretical physicist working on quantum materials,
-      two-dimensional systems, and topological phenomena.
-      My research focuses on electronic, optical, and transport properties
-      of low-dimensional materials, including graphene, transition-metal
-      dichalcogenides, moiré systems, and topological photonic structures.
-    </p>
-  </section>
-
-  <section>
-    <h2>Research Interests</h2>
-    <ul>
-      <li>Quantum transport in two-dimensional materials</li>
-      <li>Moiré exciton photoluminescence and disorder metrology</li>
-      <li>Topological photonics and lattice models</li>
-      <li>Quantum-information-inspired materials physics</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Links</h2>
-    <p>
-      <a href="https://github.com/Ka-Wakabayashi">GitHub</a>
-    </p>
-  </section>
 </body>
 </html>
